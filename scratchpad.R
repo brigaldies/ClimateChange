@@ -85,11 +85,6 @@ cityT.Test <- function(city, data_grouped_by_city_year, year_from, year_to) {
     t.test(range_2$AverageTemperature - range_1$AverageTemperature, alternative = "greater")$p.value
 }
 
-# Plot labeller
-cityAndPvalue <- function(value) { 
-    paste(value, 'p-value =', round(city_pvalues[value], 6), ifelse(city_pvalues[value] < 0.05, '\nH0 rejected', '\nH0 accepted'))
-}
-
 trendByCountryAndCity <- function(temperature_data, country, year_from, year_to) {
     message(paste('country:', country))
     message(paste('year_from:', year_from))
@@ -103,15 +98,10 @@ trendByCountryAndCity <- function(temperature_data, country, year_from, year_to)
     message(paste(cities, ', '))
     country_data_grouped_by_city_year <- country_data %>% group_by(City, Year) %>% summarize(AverageTemperature = mean(AverageTemperature))
 
-    #range_1 <- filter(country_data_grouped_by_city_year, Year >= range_1_year_from & Year <= range_1_year_to) # +-5 years around 'year_from'
-    #range_2 <- filter(country_data_grouped_by_city_year, Year >= range_2_year_from & Year <= range_2_year_to) # +-5 years around 'year_to'
-    # Student t.test
-    #t1 <- t.test(range_2$AverageTemperature - range_1$AverageTemperature, alternative = "greater")
-    #t1
-    #1$p.value < .05
-
     city_pvalues <- sapply(cities, cityT.Test, data_grouped_by_city_year = country_data_grouped_by_city_year, year_from = year_from, year_to = year_to)
     message(paste(round(city_pvalues, 6), ''))
+    
+    # Plot labeller
     cityAndPvalue <- function(value) { 
         paste(value, 'p-value =', round(city_pvalues[value], 6), ifelse(city_pvalues[value] < 0.05, '\nH0 rejected', '\nH0 accepted'))
     }
