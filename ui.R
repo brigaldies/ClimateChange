@@ -7,7 +7,9 @@ shinyUI(fluidPage(
         wellPanel(
             fluidRow(
                 column(10, 
-                       helpText("Select a country and year range, and click on the Submit button to retrieve and perform the analyses:")
+                       #helpText("Select a country and year range, and click on the Submit button to retrieve and perform the analyses:")
+                       #helpText("Select a country and year range:")
+                       uiOutput("helpText")
                 )            
             ),
             fluidRow(
@@ -19,10 +21,11 @@ shinyUI(fluidPage(
                 ),
                 column(2,
                        uiOutput("yearTo")
-                ),
-                column(2,
-                       submitButton('Submit')
-                )                
+                )
+#                 ,
+#                 column(2,
+#                        submitButton('Submit')
+#                 )                
             )
         ),
         tabsetPanel(type = "tabs",
