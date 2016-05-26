@@ -1,8 +1,8 @@
 ---
-title       : Empty deck
-subtitle    : To be used as a starting point
+title       : Hypothesis Testing of the Rising of Earth Surface Temperature
+subtitle    : Exploring and hypothesis testing of earth surface temperature data
 author      : Bertrand Rigaldies
-job         : Data Nerd
+job         : Data Scientist
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
 highlighter : highlight.js  # {highlight.js, prettify, highlight}
 hitheme     : tomorrow      # 
@@ -11,16 +11,40 @@ mode        : selfcontained # {standalone, draft}
 knit        : slidify::knit2slides
 ---
 
-## Read-And-Delete
+```{r libraries, echo=FALSE, results="hide"}
+require(dplyr)
+require(lubridate)
+require(ggplot2)
+```
 
-1. Edit YAML front matter
-2. Write using R Markdown
-3. Use an empty line followed by three dashes to separate slides!
+```{r load-data}
+data_raw <- read.csv('./GlobalLandTemperaturesByMajorCity.csv')
+```
+
+
+## Slide 1
+
+1. Null Hypothesis
+2. Data
+3. Analysis
 
 --- .class #id 
 
 ## Slide 2
 
+--- .class #id 
 
+```{r load-data}
+data_raw <- read.csv('./GlobalLandTemperaturesByMajorCity.csv')
+```
 
+## Slide 3
+
+--- .class #id 
+
+## Slide 4
+
+--- .class #id 
+
+## Slide 5
 

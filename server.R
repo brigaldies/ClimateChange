@@ -4,6 +4,7 @@ require(lubridate)
 require(ggplot2)
 library(shiny)
 library(DT)
+library(mgcv)
 
 # -----------------------------------------------------------------------------
 # Startup processing (One-time)
