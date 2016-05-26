@@ -142,3 +142,7 @@ trendByCountryAndCity <- function(temperature_data, country, year_from, year_to)
 }
 
 
+# Temperature uncertainty
+ggplot(country_data, aes(x=Year,y=AverageTemperatureUncertainty))+
+    geom_point(shape=1)+geom_smooth()+ggtitle(paste0("Average Temperature Uncertainty\n", country))+
+    xlab("Year")+ylab("Average Temperature Uncertainty")
