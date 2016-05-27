@@ -1,8 +1,8 @@
 ---
 title       : Hypothesis Testing of the Rising of Earth Surface Temperature
-subtitle    : Exploring and hypothesis testing of earth surface temperature data
+subtitle    : 
 author      : Bertrand Rigaldies
-job         : Data Scientist
+job         : Data Science Enthusiast
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
 highlighter : highlight.js  # {highlight.js, prettify, highlight}
 hitheme     : tomorrow      # 
@@ -11,40 +11,94 @@ mode        : selfcontained # {standalone, draft}
 knit        : slidify::knit2slides
 ---
 
-```{r libraries, echo=FALSE, results="hide"}
+```{r global_options, echo=FALSE, warning=FALSE, message=FALSE, error=TRUE}
 require(dplyr)
 require(lubridate)
 require(ggplot2)
+require(xtable)
+#opts_chunk$set(warning=FALSE, message=FALSE, error=TRUE)
 ```
 
-```{r load-data}
-data_raw <- read.csv('./GlobalLandTemperaturesByMajorCity.csv')
+## Climate Change - Is your country warming up?
+
+1. Some climate change questions that have captivated us:
+    + Have temperatures been rising in your country?
+    + Since when, or during what period?
+    + Is the temperature rise statistical significant?
+1. Data Exploration
+1. Statistical Inference
+1. Check out my [Shinyapp](https://brigaldies.shinyapps.io/ClimateChange/).
+
+--- .class #id 
+
+## The Data: Earth Surface Temperature Data
+
+```{r load-data, echo=FALSE, results='hide', warning=FALSE, message=FALSE, error=TRUE}
+source(file = './server.R')
+#data_raw <- read.csv('./GlobalLandTemperaturesByMajorCity.csv')
+#data_raw <- na.omit(data_raw) # Remove incomplete records
+#data_raw <- data_raw %>% 
+#    mutate(Date = ymd(dt)) %>% 
+#    mutate(Year = year(Date))
 ```
 
-
-## Slide 1
-
-1. Null Hypothesis
-2. Data
-3. Analysis
-
---- .class #id 
-
-## Slide 2
-
---- .class #id 
-
-```{r load-data}
-data_raw <- read.csv('./GlobalLandTemperaturesByMajorCity.csv')
+```{r sample-data, echo=FALSE, results='hide'}
+# We'll use a data sample:
+country <- 'United States'
+sample_data <- data0 %>% filter(Country == country & City == 'New York')
+sample_data_min_year <- min(sample_data$Year)
+sample_data_max_year <- max(sample_data$Year)
+sample_data <- sample_data %>% 
+    filter(Year >= sample_data_max_year) %>% 
+    select(dt, Country, City, AverageTemperature, AverageTemperatureUncertainty, Latitude, Longitude)
 ```
 
-## Slide 3
+1. Source: [Kaggle](https://www.kaggle.com/berkeleyearth/climate-change-earth-surface-temperature-data)
+2. Sample data (New York, United States, `r sample_data_max_year`)
+
+```{r show-sample-data, echo=FALSE, results='asis'}
+names(sample_data) <- c("Date", "Country", "City", "AvgTemperature", "AvgTempUncertainty", "Lat", "Long")
+print(xtable(head(sample_data, 10), 
+             auto=TRUE,              
+             align = c('r', 'l', 'l', 'l', 'r', 'r', 'r', 'r'),
+             display = c('d', 's', 's', 's', 'f', 'f', 's', 's')
+             ), 
+      type="html")
+```
 
 --- .class #id 
 
-## Slide 4
+## Average Temperature Measurement Uncertainty
+
+Temperature **measurement uncertainty** has decreased over time: For example, for New York, United States, the measurements have improved since the early 1900's. Something to consider when choosing a time period to analyze the data.
+
+```{r temperature-uncertainty, echo=FALSE, fig.height = 6, fig.width = 10, fig.align = 'center'}
+sample_data <- data0 %>% filter(Country == country & City == 'New York')
+sample_data_min_year <- min(sample_data$Year)
+sample_data_max_year <- max(sample_data$Year)
+plot_title = paste('Average Temperature Uncertainty in', country, 'Between', sample_data_min_year, 'and', sample_data_max_year)    
+ggplot(sample_data, aes(x = Year, y = AverageTemperatureUncertainty)) +
+    geom_point(shape = 1) +
+    geom_smooth() + 
+    scale_x_continuous(breaks = seq(floor(sample_data_min_year/10)*10, floor(sample_data_max_year/10)*10 + 10, by = 20)) +
+    labs(x = 'Year', y = expression('Average Temperature Uncertainty (' * Degree~degree*C * ')'), title = plot_title) +
+    theme(plot.title = element_text(lineheight=.8, face="bold"))            
+```
 
 --- .class #id 
 
-## Slide 5
+## Average Temperature Trend and Hypothesis Testing
 
+Hypothesis H0: The temperature in your city has **NOT** increased.
+
+T.Test result: Rejected for all cities in the United States.
+
+```{r temperature-trend-and-ho-test, echo=FALSE, fig.height = 6, fig.width = 10, fig.align = 'center', warning=FALSE, message=FALSE, error=TRUE} 
+country_data <- data0 %>% filter(Country == country)
+country_data_grouped_by_city <- country_data %>% group_by(City) %>% summarize(MinYear = min(Year), MaxYear = max(Year))
+year_from = 1950
+year_to = 2013
+min_year = max(country_data_grouped_by_city$MinYear)
+max_year = min(country_data_grouped_by_city$MaxYear) 
+trendByCountryAndCity(country_data = country_data, country = country, year_from, year_to, min_year, max_year)
+```
