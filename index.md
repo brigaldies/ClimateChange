@@ -21,7 +21,8 @@ knit        : slidify::knit2slides
     + Is the temperature rise statistical significant?
 1. Data Exploration
 1. Statistical Inference
-1. Check out my [Shinyapp](https://brigaldies.shinyapps.io/ClimateChange/).
+1. Check out my [Shinyapp](https://brigaldies.shinyapps.io/ClimateChange/)
+1. See the code in [GitHub](https://github.com/brigaldies/ClimateChange)
 
 --- .class #id 
 
@@ -61,7 +62,8 @@ Temperature **measurement uncertainty** has decreased over time: For example, fo
 
 ## Temperature Increase Hypothesis Testing
 
-Hypothesis H0: The temperature in your city has **NOT** increased.
-T.Test result: Rejected for all cities in the United States.
+**Hypothesis H0**: The temperature in your country has **NOT** increased.
 
 <img src="assets/fig/temperature-trend-and-ho-test-1.png" title="plot of chunk temperature-trend-and-ho-test" alt="plot of chunk temperature-trend-and-ho-test" style="display: block; margin: auto;" />
+
+Example: **T.Test result**: H0 **Rejected** for New York, Chicago, and Los Angeles in the United States for the 1950-2013 period.
