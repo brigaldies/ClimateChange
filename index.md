@@ -51,7 +51,7 @@ knit        : slidify::knit2slides
 
 --- .class #id 
 
-## Average Temperature Measurement Uncertainty
+## Temperature Measurement Uncertainty
 
 Temperature **measurement uncertainty** has decreased over time: For example, for New York, United States, the measurements have improved since the early 1900's. Something to consider when choosing a time period to analyze the data.
 
@@ -59,10 +59,9 @@ Temperature **measurement uncertainty** has decreased over time: For example, fo
 
 --- .class #id 
 
-## Average Temperature Trend and Hypothesis Testing
+## Temperature Increase Hypothesis Testing
 
 Hypothesis H0: The temperature in your city has **NOT** increased.
-
 T.Test result: Rejected for all cities in the United States.
 
 <img src="assets/fig/temperature-trend-and-ho-test-1.png" title="plot of chunk temperature-trend-and-ho-test" alt="plot of chunk temperature-trend-and-ho-test" style="display: block; margin: auto;" />

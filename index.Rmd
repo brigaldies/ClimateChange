@@ -68,7 +68,7 @@ print(xtable(head(sample_data, 10),
 
 --- .class #id 
 
-## Average Temperature Measurement Uncertainty
+## Temperature Measurement Uncertainty
 
 Temperature **measurement uncertainty** has decreased over time: For example, for New York, United States, the measurements have improved since the early 1900's. Something to consider when choosing a time period to analyze the data.
 
@@ -87,10 +87,9 @@ ggplot(sample_data, aes(x = Year, y = AverageTemperatureUncertainty)) +
 
 --- .class #id 
 
-## Average Temperature Trend and Hypothesis Testing
+## Temperature Increase Hypothesis Testing
 
 Hypothesis H0: The temperature in your city has **NOT** increased.
-
 T.Test result: Rejected for all cities in the United States.
 
 ```{r temperature-trend-and-ho-test, echo=FALSE, fig.height = 6, fig.width = 10, fig.align = 'center', warning=FALSE, message=FALSE, error=TRUE} 
