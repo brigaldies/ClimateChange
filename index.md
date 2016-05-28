@@ -66,4 +66,4 @@ Temperature **measurement uncertainty** has decreased over time: For example, fo
 
 <img src="assets/fig/temperature-trend-and-ho-test-1.png" title="plot of chunk temperature-trend-and-ho-test" alt="plot of chunk temperature-trend-and-ho-test" style="display: block; margin: auto;" />
 
-Example: **T.Test result**: H0 **Rejected** for New York, Chicago, and Los Angeles in the United States for the 1950-2013 period.
+Example: **T.Test result**: H0 **Rejected** for New York, Chicago, and Los Angeles in the United States for the 1950-2013 period. Consequently, these cities have been warming up since the 50's.

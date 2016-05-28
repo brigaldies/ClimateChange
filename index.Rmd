@@ -102,4 +102,4 @@ max_year = min(country_data_grouped_by_city$MaxYear)
 trendByCountryAndCity(country_data = country_data, country = country, year_from, year_to, min_year, max_year)
 ```
 
-Example: **T.Test result**: H0 **Rejected** for New York, Chicago, and Los Angeles in the United States for the 1950-2013 period.
+Example: **T.Test result**: H0 **Rejected** for New York, Chicago, and Los Angeles in the United States for the 1950-2013 period. Consequently, these cities have been warming up since the 50's.
